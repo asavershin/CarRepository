@@ -5,37 +5,35 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.tinkoff.edu.asavershin.hw4.dto.*;
 import ru.tinkoff.edu.asavershin.hw4.mappers.CarMapper;
-import ru.tinkoff.edu.asavershin.hw4.services.CarLister;
+import ru.tinkoff.edu.asavershin.hw4.services.CarService;
 
 @RestController
 @RequestMapping(path="/car")
 @RequiredArgsConstructor
 public class CarController {
 
-    private final CarLister carLister;
+    private final CarService carService;
     private final CarMapper carMapper;
 
 
     @PostMapping
     public ResponseCar createCar(@RequestBody @Valid RequestCar request){
-        return carMapper.carToResponseCar(carLister.createCar(carMapper.requestCarToCar(request)));
-
-//        carLister.createCar(carMapper.requestCarToCar(request));
-
+        return carMapper.carToResponseCar(carService.createCar(carMapper.requestCarToCar(request)));
     }
-//
-//    @PutMapping
-//    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){
-//        return new ResponseCar(carLister.updateCar(request));
-//    }
-//
-//    @DeleteMapping(path = "/{carId}")
-//    public void deleteCar(@PathVariable Long carId){
-//        carLister.deleteCar(carId);
-//    }
-//
-//    @GetMapping(path = "/{carId}")
-//    public ResponseCar updateCar(@PathVariable Long carId){
-//        return new ResponseCar(carLister.getCar(carId));
-//    }
+
+    @PutMapping
+    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){
+        return carMapper
+                .carToResponseCar(carService.updateCar(request.getId(), carMapper.requestCarToCar(request)));
+    }
+
+    @DeleteMapping(path = "/{carId}")
+    public void deleteCar(@PathVariable Long carId){
+        carService.deleteCar(carId);
+    }
+
+    @GetMapping(path = "/{carId}")
+    public ResponseCar updateCar(@PathVariable Long carId){
+        return carMapper.carToResponseCar(carService.getCar(carId));
+    }
 }
