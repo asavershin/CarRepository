@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 public class LocalDateTimeConverting {
     static String stringFormat = "dd-MM-yyyy";
     public static LocalDateTime stringToLocalDateTime(String date) throws ParseException {
-        System.out.println("fuck");
-        System.out.println(date);
         return new SimpleDateFormat(stringFormat)
                 .parse(date).toInstant()
                 .atZone(ZoneId.systemDefault())
