@@ -1,10 +1,13 @@
 package ru.tinkoff.edu.asavershin.hw4.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import ru.tinkoff.edu.asavershin.hw4.entities.Car;
 import ru.tinkoff.edu.asavershin.hw4.utility.LocalDateTimeConverting;
 
 @Getter
+@AllArgsConstructor
 public class ResponseCar {
 
     private Long id;
@@ -17,11 +20,5 @@ public class ResponseCar {
 
     private String model;
 
-    public ResponseCar(Car car) {
-        this.id = car.getId();
-        this.created = LocalDateTimeConverting.localDateTimeToString(car.getCreated());
-        this.destroyed = LocalDateTimeConverting.localDateTimeToString(car.getDestroyed());
-        this.color = car.getColor();
-        this.model = car.getModel().toString();
-    }
+    private ResponsePerson responsePerson;
 }

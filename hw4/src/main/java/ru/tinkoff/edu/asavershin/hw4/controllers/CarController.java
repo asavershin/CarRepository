@@ -16,23 +16,23 @@ public class CarController {
         this.carLister = carLister;
     }
 
-    @PostMapping
-    public ResponseCar createCar(@RequestBody @Valid RequestCar request){
-        return new ResponseCar(carLister.createCourse(request));
-    }
-
-    @PutMapping
-    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){
-        return new ResponseCar(carLister.updateCar(request));
-    }
-
-    @DeleteMapping(path = "/{carId}")
-    public void deleteCar(@PathVariable Long carId){
-        carLister.deleteCar(carId);
-    }
-
-    @GetMapping(path = "/{carId}")
-    public ResponseCar updateCar(@PathVariable Long carId){
-        return new ResponseCar(carLister.getCar(carId));
-    }
+//    @PostMapping
+//    public ResponseCar createCar(@RequestBody @Valid RequestCar request){
+//        return new ResponseCar(carLister.createCourse(request));
+//    }
+//
+//    @PutMapping
+//    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){
+//        return new ResponseCar(carLister.updateCar(request));
+//    }
+//
+//    @DeleteMapping(path = "/{carId}")
+//    public void deleteCar(@PathVariable Long carId){
+//        carLister.deleteCar(carId);
+//    }
+//
+//    @GetMapping(path = "/{carId}")
+//    public ResponseCar updateCar(@PathVariable Long carId){
+//        return new ResponseCar(carLister.getCar(carId));
+//    }
 }

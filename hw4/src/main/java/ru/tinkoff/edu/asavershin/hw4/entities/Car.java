@@ -12,12 +12,14 @@ public class Car {
 
     private Long id;
 
-    private LocalDateTime created;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime destroyed;
+    private LocalDateTime destroyedAt;
 
     private String color;
 
     private Model model;
+
+    private Person owner;
 
 }
