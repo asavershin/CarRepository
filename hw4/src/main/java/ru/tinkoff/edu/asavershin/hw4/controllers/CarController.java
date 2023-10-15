@@ -60,7 +60,7 @@ public class CarController {
     }
 
     @GetMapping(path = "/{carId}")
-    @Operation(description = "Удаление машины")
+    @Operation(description = "Получение машины")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok", content = {@Content()}),
             @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
