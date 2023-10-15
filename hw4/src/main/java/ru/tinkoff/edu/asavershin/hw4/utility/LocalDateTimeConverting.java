@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.asavershin.hw4.mappers;
+package ru.tinkoff.edu.asavershin.hw4.utility;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

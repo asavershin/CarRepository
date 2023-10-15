@@ -2,7 +2,7 @@ package ru.tinkoff.edu.asavershin.hw4.dto;
 
 import lombok.Getter;
 import ru.tinkoff.edu.asavershin.hw4.entities.Car;
-import ru.tinkoff.edu.asavershin.hw4.mappers.LocalDateTimeConverting;
+import ru.tinkoff.edu.asavershin.hw4.utility.LocalDateTimeConverting;
 
 @Getter
 public class ResponseCar {
