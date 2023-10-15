@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.asavershin.hw4.entities;
+package ru.tinkoff.edu.asavershin.hw4.dao.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

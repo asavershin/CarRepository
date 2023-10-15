@@ -3,8 +3,7 @@ package ru.tinkoff.edu.asavershin.hw4.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import ru.tinkoff.edu.asavershin.hw4.entities.Person;
+import ru.tinkoff.edu.asavershin.hw4.dao.entities.Person;
 
 @Configuration
 public class Config {

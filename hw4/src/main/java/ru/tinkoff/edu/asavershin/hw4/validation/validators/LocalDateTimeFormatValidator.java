@@ -18,7 +18,7 @@ public class LocalDateTimeFormatValidator implements ConstraintValidator<LocalDa
         boolean isValid = true;
 
         try {
-            localStartDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getCreated());
+            localStartDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getCreatedAt());
         } catch (ParseException e) {
             isValid = false;
             context.disableDefaultConstraintViolation();
@@ -26,7 +26,7 @@ public class LocalDateTimeFormatValidator implements ConstraintValidator<LocalDa
         }
 
         try {
-            localEndDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getDestroyed());
+            localEndDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getDestroyedAt());
         } catch (ParseException e) {
             isValid = false;
             context.disableDefaultConstraintViolation();

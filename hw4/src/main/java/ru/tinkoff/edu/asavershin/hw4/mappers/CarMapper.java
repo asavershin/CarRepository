@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import ru.tinkoff.edu.asavershin.hw4.dto.RequestCar;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponseCar;
-import ru.tinkoff.edu.asavershin.hw4.entities.Car;
+import ru.tinkoff.edu.asavershin.hw4.dao.entities.Car;
 import ru.tinkoff.edu.asavershin.hw4.utility.LocalDateTimeConverting;
 
 import java.text.ParseException;
@@ -19,9 +19,9 @@ public interface CarMapper {
     @Mapping(target = "responsePerson", source = "owner")
     ResponseCar carToResponseCar(Car car);
 
-    @Mapping(target = "createdAt", source = "created", qualifiedByName = "stringToDate")
-    @Mapping(target = "destroyedAt", source = "destroyed", qualifiedByName = "stringToDate")
-    Car requestCarToResponse(RequestCar requestCar);
+    @Mapping(target = "createdAt", source = "createdAt", qualifiedByName = "stringToDate")
+    @Mapping(target = "destroyedAt", source = "destroyedAt", qualifiedByName = "stringToDate")
+    Car requestCarToCar(RequestCar requestCar);
 
     @Named("dateToString")
     default String dateToString(LocalDateTime date){

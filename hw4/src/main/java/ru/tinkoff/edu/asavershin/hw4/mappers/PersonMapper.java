@@ -3,7 +3,7 @@ package ru.tinkoff.edu.asavershin.hw4.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePerson;
-import ru.tinkoff.edu.asavershin.hw4.entities.Person;
+import ru.tinkoff.edu.asavershin.hw4.dao.entities.Person;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {

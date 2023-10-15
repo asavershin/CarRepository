@@ -1,25 +1,28 @@
 package ru.tinkoff.edu.asavershin.hw4.controllers;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.tinkoff.edu.asavershin.hw4.dto.*;
+import ru.tinkoff.edu.asavershin.hw4.mappers.CarMapper;
 import ru.tinkoff.edu.asavershin.hw4.services.CarLister;
 
 @RestController
 @RequestMapping(path="/car")
+@RequiredArgsConstructor
 public class CarController {
 
     private final CarLister carLister;
+    private final CarMapper carMapper;
 
 
-    public CarController(CarLister carLister) {
-        this.carLister = carLister;
+    @PostMapping
+    public ResponseCar createCar(@RequestBody @Valid RequestCar request){
+        return carMapper.carToResponseCar(carLister.createCar(carMapper.requestCarToCar(request)));
+
+//        carLister.createCar(carMapper.requestCarToCar(request));
+
     }
-
-//    @PostMapping
-//    public ResponseCar createCar(@RequestBody @Valid RequestCar request){
-//        return new ResponseCar(carLister.createCourse(request));
-//    }
 //
 //    @PutMapping
 //    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){

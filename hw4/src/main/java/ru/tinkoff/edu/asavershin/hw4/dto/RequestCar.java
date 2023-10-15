@@ -1,5 +1,6 @@
 package ru.tinkoff.edu.asavershin.hw4.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,10 +19,12 @@ public class RequestCar {
     private Long id;
 
     @Size(max = 100, message = "Слишком длинная дата")
-    private String created;
+    @JsonAlias({"createdAt", "created_at"})
+    private String createdAt;
 
     @Size(max = 100, message = "Слишком длинная дата")
-    private String destroyed;
+    @JsonAlias({"destroyedAt", "destroyed_at"})
+    private String destroyedAt;
 
     @NotBlank(message = "Не заполнен цвет")
     @Size(max = 20,message = "Слишком длинное название цвета")

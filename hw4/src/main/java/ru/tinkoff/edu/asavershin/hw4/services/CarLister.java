@@ -1,43 +1,22 @@
 package ru.tinkoff.edu.asavershin.hw4.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.tinkoff.edu.asavershin.hw4.dto.RequestCar;
-import ru.tinkoff.edu.asavershin.hw4.entities.Car;
-import ru.tinkoff.edu.asavershin.hw4.entities.Model;
-import ru.tinkoff.edu.asavershin.hw4.handlers.localexceptions.CarNotFoundException;
-import ru.tinkoff.edu.asavershin.hw4.utility.LocalDateTimeConverting;
+import ru.tinkoff.edu.asavershin.hw4.dao.CarDao;
+import ru.tinkoff.edu.asavershin.hw4.dao.entities.Car;
 
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class CarLister {
 
-    private final List<Car> cars;
-    private Long carId;
+    private final CarDao carDao;
 
-    public CarLister() {
-        cars = new LinkedList<>();
-        carId = 1L;
+    public Car createCar(Car car){
+        return carDao.addCar(car);
     }
-
-//    public Car createCourse(RequestCar request){
-//        Car newCar = null;
-//        try {
-//            newCar = new Car((long)(carId++),
-//                                    LocalDateTimeConverting.stringToLocalDateTime(request.getCreated()),
-//                                    LocalDateTimeConverting.stringToLocalDateTime(request.getDestroyed()),
-//                                    request.getColor(),
-//                                    Model.valueOf(request.getModel())
-//                    );
-//        } catch (ParseException e) {
-//            throw new RuntimeException("Неизвестная ошибка");
-//        }
-//        cars.add(newCar);
-//        return  newCar;
-//    }
 //
 //    public Car updateCar(RequestCar request){
 //        var updatedCar = cars.stream().filter(car -> Objects.equals(car.getId(), request.getId()))

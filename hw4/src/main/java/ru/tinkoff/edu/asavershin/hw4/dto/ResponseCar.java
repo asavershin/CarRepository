@@ -2,9 +2,6 @@ package ru.tinkoff.edu.asavershin.hw4.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
-import ru.tinkoff.edu.asavershin.hw4.entities.Car;
-import ru.tinkoff.edu.asavershin.hw4.utility.LocalDateTimeConverting;
 
 @Getter
 @AllArgsConstructor
