@@ -13,6 +13,11 @@ import ru.tinkoff.edu.asavershin.hw4.dto.*;
 import ru.tinkoff.edu.asavershin.hw4.mappers.CarMapper;
 import ru.tinkoff.edu.asavershin.hw4.services.CarService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 @RestController
 @RequestMapping(path="/car")
 @RequiredArgsConstructor
@@ -66,6 +71,18 @@ public class CarController {
             @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
     })
     public ResponseCar getCar(@PathVariable Long carId){
-        return carMapper.carToResponseCar(carService.getCar(carId));
+        return carMapper.carToResponseCar(carService.getCarById(carId));
+    }
+
+    @GetMapping("/filter")
+    public List<ResponseCar> filterCars(
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) String country,
+            @RequestParam(required = false) String color
+    ) {
+        return carService.filterCarsByAgeCountryAndColor(age, country, color)
+                .stream()
+                .map(carMapper::carToResponseCar)
+                .collect(Collectors.toList());
     }
 }

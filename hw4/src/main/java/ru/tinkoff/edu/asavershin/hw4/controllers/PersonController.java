@@ -10,6 +10,9 @@ import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePerson;
 import ru.tinkoff.edu.asavershin.hw4.mappers.PersonMapper;
 import ru.tinkoff.edu.asavershin.hw4.services.PersonService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(path="/person")
 @RequiredArgsConstructor
@@ -19,7 +22,7 @@ public class PersonController {
     private final PersonMapper personMapper;
     @PostMapping
     @Operation(description = "Создание человека")
-    public ResponsePerson createPerson(@Valid PersonRequestForCreate request){
+    public ResponsePerson createPerson(@RequestBody @Valid PersonRequestForCreate request){
         return personMapper
                 .personToResponsePerson(personService.createPerson(personMapper.requestPersonToPerson(request)));
     }
@@ -33,6 +36,17 @@ public class PersonController {
     @Operation(description = "Найти человека по id")
     public ResponsePerson getPersonById (@PathVariable Long personId){
         return personMapper.personToResponsePerson(personService.findPersonById(personId));
+    }
+
+    @GetMapping("/filter")
+    public List<ResponsePerson> filterPeople(
+            @RequestParam(required = false) String country,
+            @RequestParam(required = false) Integer amount
+    ) {
+        return personService.findPeopleWithCarsFromCountryAndAmount(country, amount)
+                .stream()
+                .map(personMapper::personToResponsePerson)
+                .collect(Collectors.toList());
     }
 
 }

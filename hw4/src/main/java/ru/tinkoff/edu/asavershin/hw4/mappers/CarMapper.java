@@ -14,13 +14,11 @@ import java.time.LocalDateTime;
 @Mapper(componentModel = "spring", uses = PersonMapper.class)
 public interface CarMapper {
 
-    @Mapping(target = "created", source = "createdAt", qualifiedByName = "dateToString")
-    @Mapping(target = "destroyed", source = "destroyedAt", qualifiedByName = "dateToString")
-    @Mapping(target = "responsePerson", source = "owner")
+    @Mapping(target = "releaseDate", source = "releaseDate", qualifiedByName = "dateToString")
+    @Mapping(target = "owner", source = "owner")
     ResponseCar carToResponseCar(Car car);
 
-    @Mapping(target = "createdAt", source = "createdAt", qualifiedByName = "stringToDate")
-    @Mapping(target = "destroyedAt", source = "destroyedAt", qualifiedByName = "stringToDate")
+    @Mapping(target = "releaseDate", source = "releaseDate", qualifiedByName = "stringToDate")
     Car requestCarToCar(RequestCar requestCar);
 
     @Named("dateToString")

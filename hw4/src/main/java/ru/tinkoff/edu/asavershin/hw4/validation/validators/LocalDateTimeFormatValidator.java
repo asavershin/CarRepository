@@ -13,32 +13,16 @@ public class LocalDateTimeFormatValidator implements ConstraintValidator<LocalDa
     @Override
     public boolean isValid(RequestCar requestCar, ConstraintValidatorContext context) {
 
-        LocalDateTime localStartDate = null;
-        LocalDateTime localEndDate = null;
-        boolean isValid = true;
+        LocalDateTime releaseDate = null;
 
         try {
-            localStartDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getCreatedAt());
+            releaseDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getReleaseDate());
         } catch (ParseException e) {
-            isValid = false;
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate("Ошибка в дате создания").addConstraintViolation();
+            return false;
         }
 
-        try {
-            localEndDate = LocalDateTimeConverting.stringToLocalDateTime(requestCar.getDestroyedAt());
-        } catch (ParseException e) {
-            isValid = false;
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Ошибка в дате конца").addConstraintViolation();
-        }
-
-        if (localStartDate != null && localEndDate != null && localEndDate.isBefore(localStartDate)) {
-            isValid = false;
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Дата конца должна быть позже даты создания").addConstraintViolation();
-        }
-
-        return isValid;
+        return true;
     }
 }

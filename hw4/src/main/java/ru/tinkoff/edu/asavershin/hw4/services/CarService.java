@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.tinkoff.edu.asavershin.hw4.dao.entities.Car;
 import ru.tinkoff.edu.asavershin.hw4.dao.repositories.CarRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CarService {
@@ -23,7 +25,11 @@ public class CarService {
         carRepository.deleteById(id);
     }
 
-    public Car getCar(Long id) {
+    public Car getCarById(Long id) {
         return carRepository.findCarById(id);
+    }
+
+    public List<Car> filterCarsByAgeCountryAndColor(Integer age, String country, String color) {
+        return carRepository.filterCarsByAgeCountryAndColor(age, country, color);
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "autoservice_ref")
 public class Autoservice {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_jn_seq")
@@ -17,11 +18,11 @@ public class Autoservice {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "adress")
+    @Column(name = "address")
     private String address;
     @Column(name = "country")
     private String country;
-    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "autoservice", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true, fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Car> cars;

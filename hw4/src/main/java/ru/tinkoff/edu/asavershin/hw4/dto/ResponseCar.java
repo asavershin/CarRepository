@@ -9,13 +9,13 @@ public class ResponseCar {
 
     private Long id;
 
-    private String created;
-
-    private String destroyed;
+    private String releaseDate;
 
     private String color;
 
     private String model;
 
-    private ResponsePerson responsePerson;
+    private Long evp;
+
+    private ResponsePerson owner;
 }

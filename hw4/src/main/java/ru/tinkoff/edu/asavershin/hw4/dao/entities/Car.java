@@ -8,18 +8,19 @@ import java.util.Date;
 
 @Entity
 @Data
+@Table(name = "car_jn")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_jn_seq")
     @SequenceGenerator(name = "car_jn_seq", sequenceName = "car_jn_seq", allocationSize = 1)
     private Long id;
     @Column(name = "release_date")
-    private Date releaseDate;
+    private LocalDateTime releaseDate;
     @Column(name = "color")
     private String color;
     @Enumerated(EnumType.STRING)
     @Column(name = "model")
-    private String model;
+    private Model model;
     @Column(name = "evp")
     private Long evp;
     @Column(name = "created_at")
@@ -27,10 +28,12 @@ public class Car {
     @Column(name = "last_updated_at")
     private LocalDateTime lastUpdatedAt;
 
-    @ManyToOne
-    private Person person;
+    @ManyToOne()
+    @JoinColumn(name = "person_id")
+    private Person owner;
 
-    @ManyToOne
+    @ManyToOne()
+    @JoinColumn(name = "autoservice_id")
     private Autoservice autoservice;
 
     @PrePersist
