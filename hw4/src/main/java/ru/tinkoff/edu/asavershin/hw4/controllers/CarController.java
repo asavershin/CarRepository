@@ -35,19 +35,19 @@ public class CarController {
         return carMapper.carToResponseCar(carService.createCar(carMapper.requestCarToCar(request)));
     }
 
-    @PutMapping
-    @Operation(description = "Обновление машины")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ok", content =
-                    { @Content(mediaType = "application/json", schema =
-                    @Schema(implementation = ResponseCar.class)) }),
-            @ApiResponse(responseCode = "400", description = "Определенная ошибка валидации", content = {@Content()}),
-            @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
-    })
-    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){
-        return carMapper
-                .carToResponseCar(carService.updateCar(request.getId(), carMapper.requestCarToCar(request)));
-    }
+//    @PutMapping
+//    @Operation(description = "Обновление машины")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Ok", content =
+//                    { @Content(mediaType = "application/json", schema =
+//                    @Schema(implementation = ResponseCar.class)) }),
+//            @ApiResponse(responseCode = "400", description = "Определенная ошибка валидации", content = {@Content()}),
+//            @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
+//    })
+//    public ResponseCar updateCar(@RequestBody @Valid RequestCar request){
+//        return carMapper
+//                .carToResponseCar(carService.updateCar(request.getId(), carMapper.requestCarToCar(request)));
+//    }
 
     @DeleteMapping(path = "/{carId}")
     @Operation(description = "Удаление машины")

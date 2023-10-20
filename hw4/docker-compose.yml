@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: bitnami/postgresql:14
+    container_name: postgresql
+    environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: postgres
+      POSTGRESQL_DATABASE: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:

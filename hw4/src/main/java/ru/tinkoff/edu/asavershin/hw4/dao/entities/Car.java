@@ -1,25 +1,47 @@
 package ru.tinkoff.edu.asavershin.hw4.dao.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-@Getter
-@Setter
-@AllArgsConstructor
+import java.util.Date;
+
+@Entity
+@Data
 public class Car {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_jn_seq")
+    @SequenceGenerator(name = "car_jn_seq", sequenceName = "car_jn_seq", allocationSize = 1)
     private Long id;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime destroyedAt;
-
+    @Column(name = "release_date")
+    private Date releaseDate;
+    @Column(name = "color")
     private String color;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "model")
+    private String model;
+    @Column(name = "evp")
+    private Long evp;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    @Column(name = "last_updated_at")
+    private LocalDateTime lastUpdatedAt;
 
-    private Model model;
+    @ManyToOne
+    private Person person;
 
-    private Person owner;
+    @ManyToOne
+    private Autoservice autoservice;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        lastUpdatedAt = createdAt;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdatedAt = LocalDateTime.now();
+    }
 
 }
