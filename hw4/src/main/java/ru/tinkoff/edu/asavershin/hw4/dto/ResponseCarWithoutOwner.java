@@ -16,5 +16,5 @@ public class ResponseCarWithoutOwner {
 
     private Long evp;
 
-    private PesponseAutoservice autoservice;
+    private ResponseAutoservice autoservice;
 }

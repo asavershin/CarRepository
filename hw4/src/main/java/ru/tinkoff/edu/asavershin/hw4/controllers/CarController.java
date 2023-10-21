@@ -29,7 +29,7 @@ public class CarController {
 
 
     @PostMapping
-    @Operation(description = "Создание машины")
+    @Operation(description = "Создание машины(изначально не привязана к салону и человеку, добавляется впоследствии)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok", content =
                     { @Content(mediaType = "application/json", schema =
@@ -68,13 +68,24 @@ public class CarController {
     @GetMapping(path = "/{carId}")
     @Operation(description = "Получение машины")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ok", content = {@Content()}),
+            @ApiResponse(responseCode = "200", description = "Ok", content =
+                    { @Content(mediaType = "application/json", schema =
+                    @Schema(implementation = ResponseCar.class)) }),
             @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
     })
     public ResponseCar getCar(@PathVariable Long carId){
         return carMapper.carToResponseCar(carService.getCarById(carId));
     }
 
+
+    @Operation(description = "Получение машины")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = List.class,
+                            subTypes = ResponseCar.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
+    })
     @GetMapping("/filter")
     public List<ResponseCar> filterCars(
             @RequestParam(required = false) Integer age,
@@ -86,7 +97,14 @@ public class CarController {
                 .map(carMapper::carToResponseCar)
                 .collect(Collectors.toList());
     }
-
+    @Operation(description = "Получение всех машин определенного человека")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = List.class,
+                            subTypes = ResponseCar.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Человек с id personId не найден", content = {@Content()})
+    })
     @GetMapping("/bypersonid/{personId}")
     public List<ResponseCar> findCarsByPersonId(@PathVariable Long personId) {
         return carService.findCarsByPersonId(personId).stream()
@@ -94,6 +112,13 @@ public class CarController {
                 .collect(Collectors.toList());
     }
 
+    @Operation(description = "Получение машины по электронному паспорту(evp)")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok", content =
+                    { @Content(mediaType = "application/json", schema =
+                    @Schema(implementation = ResponseCar.class)) }),
+            @ApiResponse(responseCode = "404", description = "Машина с evp не найдена", content = {@Content()})
+    })
     @GetMapping("/byevp/{evp}")
     public ResponseCar findCarByEvp(@PathVariable Long evp){
         return carMapper.carToResponseCar(carService.findCarsByEvp(evp));

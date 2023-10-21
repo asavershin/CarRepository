@@ -70,6 +70,10 @@ public class CarService {
     }
 
     public Car findCarsByEvp(Long evp) {
-        return carRepository.findCarByEvp(evp);
+        Car car = carRepository.findCarByEvp(evp);
+        if(car == null){
+            throw new NotFoundException("Машина с evp "+evp+" не найдена");
+        }
+        return car;
     }
 }
