@@ -85,4 +85,10 @@ public class CarController {
                 .map(carMapper::carToResponseCar)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/{personId}}")
+    public List<ResponseCarWithoutOwner> findCarsByPersonId(@RequestParam Long personId) {
+        return carService.findCarsByPersonId(personId).stream()
+                .map(carMapper);
+    }
 }

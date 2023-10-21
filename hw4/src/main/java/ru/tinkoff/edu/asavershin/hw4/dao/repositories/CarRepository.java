@@ -14,4 +14,6 @@ public interface CarRepository extends JpaRepository<Car, Long> {
             "AND (:country IS NULL OR LOWER(c.autoservice.country) = LOWER(:country)) " +
             "AND (:color IS NULL OR LOWER(c.color) = LOWER(:color))")
     List<Car> filterCarsByAgeCountryAndColor(Integer age, String country, String color);
+
+    public List<Car> findCarByOwnerId(Long personId);
 }

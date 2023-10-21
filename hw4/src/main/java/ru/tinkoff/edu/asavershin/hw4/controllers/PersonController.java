@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.tinkoff.edu.asavershin.hw4.dto.PersonRequestForCreate;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePerson;
+import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePersonWithCars;
 import ru.tinkoff.edu.asavershin.hw4.mappers.PersonMapper;
 import ru.tinkoff.edu.asavershin.hw4.services.PersonService;
 
@@ -39,13 +40,13 @@ public class PersonController {
     }
 
     @GetMapping("/filter")
-    public List<ResponsePerson> filterPeople(
+    public List<ResponsePersonWithCars> filterPeople(
             @RequestParam(required = false) String country,
             @RequestParam(required = false) Integer amount
     ) {
         return personService.findPeopleWithCarsFromCountryAndAmount(country, amount)
                 .stream()
-                .map(personMapper::personToResponsePerson)
+                .map(personMapper::personToResponsePersonWithCars)
                 .collect(Collectors.toList());
     }
 

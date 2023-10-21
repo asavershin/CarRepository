@@ -14,5 +14,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             "JOIN p.cars c " +
             "WHERE (:country IS NULL OR LOWER(c.autoservice.country) = LOWER(:country)) " +
             "GROUP BY p HAVING (:amount IS NULL OR COUNT(c) > :amount)")
-    List<Person> findPeopleWithCarsFromCountry(String country, Integer amount);
+    List<Person> findPeopleWithCarsFromCountry(@Param("country") String country, @Param("amount") Integer amount);
 }

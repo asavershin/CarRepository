@@ -32,4 +32,12 @@ public class CarService {
     public List<Car> filterCarsByAgeCountryAndColor(Integer age, String country, String color) {
         return carRepository.filterCarsByAgeCountryAndColor(age, country, color);
     }
+
+    public List<Car> findCarsByPersonId(Long personId) {
+        return carRepository.findCarByOwnerId(personId);
+    }
+
+    public List<Car> findCarsByEvp(Long evp) {
+        return carRepository.findByEvp(evp);
+    }
 }
