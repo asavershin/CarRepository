@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 
 @Getter
-public class PersonRequestForCreate implements PersonRequest {
+public class RequestPerson{
     @NotBlank(message = "У всех есть имя, введите своё пж")
     @Size(max = 50, message = "Максимальная длина имени 50 символов")
     private String name;

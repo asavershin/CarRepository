@@ -16,4 +16,14 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     List<Car> filterCarsByAgeCountryAndColor(Integer age, String country, String color);
 
     public List<Car> findCarByOwnerId(Long personId);
+    public Car findCarByEvp(Long evp);
+
+    boolean existsByEvp(Long evp);
+
+    @Query("UPDATE Car c " +
+            "SET c.color = :color, c.owner.id = :personId, c.autoservice.id = :autoserviceId " +
+            "WHERE c.id = :id")
+    void updateCar(Long id, String color, Long personId, Long autoserviceId);
+
+
 }

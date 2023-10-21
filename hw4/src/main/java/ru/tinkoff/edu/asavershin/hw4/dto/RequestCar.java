@@ -17,10 +17,6 @@ public class RequestCar {
     @JsonAlias({"createdAt", "created_at"})
     private String releaseDate;
 
-//    @Size(max = 100, message = "Слишком длинная дата")
-//    @JsonAlias({"destroyedAt", "destroyed_at"})
-//    private String destroyedAt;
-
     @NotBlank(message = "Не заполнен цвет")
     @Size(max = 20,message = "Слишком длинное название цвета")
     private String color;

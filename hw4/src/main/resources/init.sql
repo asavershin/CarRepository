@@ -27,7 +27,7 @@ CREATE TABLE car_jn
     release_date    date NOT NULL ,
     color           varchar(10) NOT NULL ,
     model           varchar(15) NOT NULL ,
-    evp             bigint NOT NULL,
+    evp             bigint NOT NULL UNIQUE,
     created_at      timestamp NOT NULL ,
     last_updated_at timestamp NOT NULL ,
     person_id       bigint,

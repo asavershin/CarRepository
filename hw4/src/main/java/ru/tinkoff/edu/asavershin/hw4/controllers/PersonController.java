@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.tinkoff.edu.asavershin.hw4.dto.PersonRequestForCreate;
+import ru.tinkoff.edu.asavershin.hw4.dto.RequestPerson;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePerson;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePersonWithCars;
 import ru.tinkoff.edu.asavershin.hw4.mappers.PersonMapper;
@@ -23,10 +23,19 @@ public class PersonController {
     private final PersonMapper personMapper;
     @PostMapping
     @Operation(description = "Создание человека")
-    public ResponsePerson createPerson(@RequestBody @Valid PersonRequestForCreate request){
+    public ResponsePerson createPerson(@RequestBody @Valid RequestPerson request){
         return personMapper
                 .personToResponsePerson(personService.createPerson(personMapper.requestPersonToPerson(request)));
     }
+
+    @PutMapping("/{personId}")
+    @Operation(description = "Обновление человека")
+    public ResponsePerson updatePerson(@PathVariable Long personId, @RequestBody @Valid RequestPerson request){
+        return personMapper
+                .personToResponsePerson(personService.
+                        updatePerson(personId, request.getAge(), request.getName()));
+    }
+
     @DeleteMapping("/{personId}")
     @Operation(description = "Удаление человека")
     public void deletePerson(@PathVariable Long personId){

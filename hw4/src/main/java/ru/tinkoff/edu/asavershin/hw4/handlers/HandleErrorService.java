@@ -6,7 +6,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import ru.tinkoff.edu.asavershin.hw4.handlers.localexceptions.CarNotFoundException;
+import ru.tinkoff.edu.asavershin.hw4.handlers.localexceptions.DuplicateEvpException;
+import ru.tinkoff.edu.asavershin.hw4.handlers.localexceptions.NotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +25,18 @@ public class HandleErrorService {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CarNotFoundException.class)
-    public ResponseEntity<Object> handleCarNotFoundException(CarNotFoundException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> handleCarNotFoundException(NotFoundException ex){
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("resultCode", HttpStatus.NOT_FOUND.value());
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DuplicateEvpException.class)
+    public ResponseEntity<Object> handleDuplicateEvpException(DuplicateEvpException ex){
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("evp:", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }

@@ -17,6 +17,13 @@ public class PersonService {
         return personRepository.save(person);
     }
 
+    public Person updatePerson(Long id, Integer age, String name){
+        Person person = personRepository.findPersonById(id);
+        person.setAge(age);
+        person.setName(name);
+        return personRepository.save(person);
+    }
+
     public void deleteById(Long personId) {
         personRepository.deleteById(personId);
     }

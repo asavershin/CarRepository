@@ -3,10 +3,8 @@ package ru.tinkoff.edu.asavershin.hw4.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.mapstruct.factory.Mappers;
 import ru.tinkoff.edu.asavershin.hw4.dao.entities.Car;
-import ru.tinkoff.edu.asavershin.hw4.dto.PersonRequest;
-import ru.tinkoff.edu.asavershin.hw4.dto.PersonRequestForCreate;
+import ru.tinkoff.edu.asavershin.hw4.dto.RequestPerson;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePerson;
 import ru.tinkoff.edu.asavershin.hw4.dao.entities.Person;
 import ru.tinkoff.edu.asavershin.hw4.dto.ResponsePersonWithCars;
@@ -28,7 +26,7 @@ public interface PersonMapper {
     @Mapping(target = "cars", source = "cars")
     ResponsePersonWithCars personToResponsePersonWithCars(Person person);
 
-    Person requestPersonToPerson(PersonRequest request);
+    Person requestPersonToPerson(RequestPerson request);
     @Named("carsAmount")
     default Integer carsAmount(List<Car> cars){
         return cars.size();
