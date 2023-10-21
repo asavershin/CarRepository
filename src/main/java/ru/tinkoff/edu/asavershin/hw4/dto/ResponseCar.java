@@ -17,6 +17,10 @@ public class ResponseCar {
 
     private Long evp;
 
+    private String createdAt;
+
+    private String lastUpdatedAt;
+
     private ResponsePerson owner;
 
     private ResponseAutoservice autoservice;

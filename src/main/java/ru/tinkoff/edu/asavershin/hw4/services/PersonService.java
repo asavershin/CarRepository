@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.tinkoff.edu.asavershin.hw4.dao.entities.Person;
 import ru.tinkoff.edu.asavershin.hw4.dao.repositories.PersonRepository;
+import ru.tinkoff.edu.asavershin.hw4.handlers.localexceptions.NotFoundException;
 
 import java.util.List;
 
@@ -19,17 +20,27 @@ public class PersonService {
 
     public Person updatePerson(Long id, Integer age, String name){
         Person person = personRepository.findPersonById(id);
+        if(person == null){
+            throw new NotFoundException("Человека с id " + id + " не найдено");
+        }
         person.setAge(age);
         person.setName(name);
         return personRepository.save(person);
     }
 
     public void deleteById(Long personId) {
+        if(!personRepository.existsById(personId)){
+            throw new NotFoundException("Человека с id " + personId + " не найдено");
+        }
         personRepository.deleteById(personId);
     }
 
     public Person  findPersonById(Long id){
-        return personRepository.findPersonById(id);
+        Person person = personRepository.findPersonById(id);
+        if (person==null){
+            throw new NotFoundException("Человека с id " + id + " не найдено");
+        }
+        return person;
     }
 
     public List<Person> findPeopleWithCarsFromCountryAndAmount(String country, Integer amount) {

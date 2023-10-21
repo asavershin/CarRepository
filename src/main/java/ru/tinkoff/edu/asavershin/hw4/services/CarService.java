@@ -22,7 +22,7 @@ public class CarService {
     private final AutoserviceRepository autoserviceRepository;
 
     public Car createCar(Car car){
-        if (carRepository.existsByEvp(car.getEvp())) {
+        if (!carRepository.existsByEvp(car.getEvp())) {
             throw new DuplicateEvpException("Такой EVP "+ car.getEvp() + " уже есть");
         }
         return carRepository.save(car);
@@ -50,6 +50,9 @@ public class CarService {
     }
 
     public void deleteCar(Long id) {
+        if (!carRepository.existsById(id)){
+            throw new NotFoundException("Машина с id " + id + " не найдена");
+        }
         carRepository.deleteById(id);
     }
 
@@ -66,6 +69,9 @@ public class CarService {
     }
 
     public List<Car> findCarsByPersonId(Long personId) {
+        if(!personRepository.existsById(personId)){
+            throw new NotFoundException("Человека c id " + personId + " не существует");
+        }
         return carRepository.findCarByOwnerId(personId);
     }
 
