@@ -24,13 +24,6 @@ public class AutoserviceService {
         return autoservice;
     }
 
-    public void deleteAutoservice(Long autoserviceId){
-        if(!autoserviceRepository.existsById(autoserviceId)){
-            throw new NotFoundException("Салон с Id "+autoserviceId+" не найден");
-        }
-        autoserviceRepository.deleteById(autoserviceId);
-    }
-
     public Autoservice updateAutoservice(Long autoserviceId, String name,
                                                  String address, String country) {
         Autoservice autoservice = autoserviceRepository.findAutoserviceById(autoserviceId);

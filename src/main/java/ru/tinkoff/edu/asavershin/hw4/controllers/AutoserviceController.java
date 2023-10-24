@@ -51,16 +51,6 @@ public class AutoserviceController {
                 .autoserviceToResponseAutoservice(autoserviceService.getAutoservice(autoserviceId));
     }
 
-    @DeleteMapping("/{autoserviceId}")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", content = {}),
-            @ApiResponse(responseCode = "404", description = "Салон с id autoserviceId не найден", content = {})
-    })
-    @Description("Получение салона")
-    public void deleteAutoservice(@PathVariable Long autoserviceId){
-        autoserviceService.deleteAutoservice(autoserviceId);
-    }
-
     @PutMapping("/{autoserviceId}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok", content = {

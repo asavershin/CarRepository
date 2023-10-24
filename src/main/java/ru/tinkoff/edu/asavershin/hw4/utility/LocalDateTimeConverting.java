@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
 public class LocalDateTimeConverting {
     static String stringFormat = "dd-MM-yyyy";
     public static LocalDateTime stringToLocalDateTime(String date) throws ParseException {
-        return new SimpleDateFormat(stringFormat)
+        SimpleDateFormat dateFormat = new SimpleDateFormat(stringFormat);
+        dateFormat.setLenient(false);
+        return dateFormat
                 .parse(date).toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();

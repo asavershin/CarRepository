@@ -28,11 +28,11 @@ public class Car {
     @Column(name = "last_updated_at")
     private LocalDateTime lastUpdatedAt;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "person_id")
     private Person owner;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "autoservice_id")
     private Autoservice autoservice;
 

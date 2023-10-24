@@ -29,10 +29,13 @@ public class PersonService {
     }
 
     public void deleteById(Long personId) {
-        if(!personRepository.existsById(personId)){
+        var person = personRepository.findPersonById(personId);
+        if(person == null){
             throw new NotFoundException("Человека с id " + personId + " не найдено");
         }
-        personRepository.deleteById(personId);
+        var cars = person.getCars();
+        cars.forEach(car -> car.setOwner(null));
+        personRepository.delete(person);
     }
 
     public Person  findPersonById(Long id){

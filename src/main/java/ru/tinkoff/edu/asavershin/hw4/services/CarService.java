@@ -22,7 +22,7 @@ public class CarService {
     private final AutoserviceRepository autoserviceRepository;
 
     public Car createCar(Car car){
-        if (!carRepository.existsByEvp(car.getEvp())) {
+        if (carRepository.existsByEvp(car.getEvp())) {
             throw new DuplicateEvpException("Такой EVP "+ car.getEvp() + " уже есть");
         }
         return carRepository.save(car);
@@ -50,10 +50,21 @@ public class CarService {
     }
 
     public void deleteCar(Long id) {
-        if (!carRepository.existsById(id)){
+        var car = carRepository.findCarById(id);
+        if (car == null){
             throw new NotFoundException("Машина с id " + id + " не найдена");
         }
-        carRepository.deleteById(id);
+        var autoservice = car.getAutoservice();
+        if(autoservice != null) {
+            autoservice.getCars().remove(car);
+            car.setAutoservice(null);
+        }
+        var person = car.getOwner();
+        if(person != null){
+            person.getCars().remove(car);
+            car.setOwner(null);
+        }
+        carRepository.delete(car);
     }
 
     public Car getCarById(Long id) {

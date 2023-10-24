@@ -5,4 +5,5 @@ import ru.tinkoff.edu.asavershin.hw4.dao.entities.Autoservice;
 
 public interface AutoserviceRepository extends JpaRepository<Autoservice, Long> {
     Autoservice findAutoserviceById(Long autoserviceId);
+
 }

@@ -87,11 +87,7 @@ public class CarController {
             @ApiResponse(responseCode = "404", description = "Машина с id carId не найдена", content = {@Content()})
     })
     @GetMapping("/filter")
-    public List<ResponseCar> filterCars(
-            @RequestParam(required = false) Integer age,
-            @RequestParam(required = false) String country,
-            @RequestParam(required = false) String color
-    ) {
+    public List<ResponseCar> filterCars(Integer age,String country,String color) {
         return carService.filterCarsByAgeCountryAndColor(age, country, color)
                 .stream()
                 .map(carMapper::carToResponseCar)

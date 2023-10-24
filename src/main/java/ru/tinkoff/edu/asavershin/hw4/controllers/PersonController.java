@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.tinkoff.edu.asavershin.hw4.dto.RequestPerson;
@@ -84,10 +87,7 @@ public class PersonController {
                     subTypes = ResponsePersonWithCars.class))}),
     })
     @Operation(description = "Фильтр людей у который больше amount машин из страны cpuntry")
-    public List<ResponsePersonWithCars> filterPeople(
-            @RequestParam(required = false) String country,
-            @RequestParam(required = false) Integer amount
-    ) {
+    public List<ResponsePersonWithCars> filterPeople(String country, Integer amount){
         return personService.findPeopleWithCarsFromCountryAndAmount(country, amount)
                 .stream()
                 .map(personMapper::personToResponsePersonWithCars)

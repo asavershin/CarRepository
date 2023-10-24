@@ -22,7 +22,7 @@ public class Autoservice {
     private String address;
     @Column(name = "country")
     private String country;
-    @OneToMany(mappedBy = "autoservice", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "autoservice", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false, fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Car> cars;

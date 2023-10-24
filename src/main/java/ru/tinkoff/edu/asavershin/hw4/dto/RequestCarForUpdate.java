@@ -15,5 +15,6 @@ public class RequestCarForUpdate {
     @Min(value = 1, message = "Id>=1")
     private Long personId;
     @Min(value = 1, message = "Id>=1")
+    @NotBlank(message = "Машина должна быть где-то куплена")
     private Long autoserviceId;
 }
