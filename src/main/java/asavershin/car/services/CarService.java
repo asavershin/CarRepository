@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class CarService {
     private final PersonRepository personRepository;
     private final AutoserviceRepository autoserviceRepository;
 
+    @Transactional
     public Car createCar(Car car){
         if (carRepository.existsByEvp(car.getEvp())) {
             throw new DuplicateEvpException("Такой EVP "+ car.getEvp() + " уже есть");
@@ -32,6 +34,7 @@ public class CarService {
         return carRepository.save(car);
     }
 
+    @Transactional
     public Car updateCar(long id, String color, Long personId, Long autoserviceId){
         Car car = carRepository.findCarById(id);
         if(car==null){
@@ -63,6 +66,7 @@ public class CarService {
         return carRepository.save(car);
     }
 
+    @Transactional
     public void deleteCar(Long id) {
         var car = carRepository.findCarById(id);
         if (car == null){

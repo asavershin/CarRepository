@@ -5,6 +5,7 @@ import asavershin.car.dao.repositories.AutoserviceRepository;
 import asavershin.car.handlers.localexceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class AutoserviceService {
         return autoservice;
     }
 
+    @Transactional
     public void deleteAutoservice(Long autoserviceId){
         var autoservice = autoserviceRepository.findAutoserviceById(autoserviceId);
         if(autoservice==null){
@@ -32,6 +34,7 @@ public class AutoserviceService {
         autoserviceRepository.delete(autoservice);
     }
 
+    @Transactional
     public Autoservice updateAutoservice(Long autoserviceId, String name,
                                                  String address, String country) {
         Autoservice autoservice = autoserviceRepository.findAutoserviceById(autoserviceId);

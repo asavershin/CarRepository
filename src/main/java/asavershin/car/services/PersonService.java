@@ -10,6 +10,7 @@ import asavershin.car.handlers.localexceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class PersonService {
         return personRepository.save(person);
     }
 
+    @Transactional
     public Person updatePerson(Long id, Integer age, String name){
         Person person = personRepository.findPersonById(id);
         if(person == null){
@@ -35,6 +37,7 @@ public class PersonService {
         return personRepository.save(person);
     }
 
+    @Transactional
     public void deleteById(Long personId) {
         var person = personRepository.findPersonById(personId);
         if(person == null){
@@ -70,6 +73,7 @@ public class PersonService {
         return people;
     }
 
+    @Transactional
     public Person createPersonWithCars(Person person){
         person.getCars().forEach(car -> car.setOwner(person));
         try {
