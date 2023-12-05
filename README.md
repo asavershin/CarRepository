@@ -5,7 +5,11 @@
 swagger: http://localhost:8081/swagger-ui/index.html
 
 # Сборка проекта
-./mvnw clean package -DskipTests
+Сборка описана для UNIX подобных систем.  
+На системах WINDOWS может отличаться сборка JAR файла, поэтому
+предпочтительнее использовать WSL в случае WINDOWS 
+
+./mvnw clean package -DskipTests  
 docker compose up
 # Окружение
 .properties основной файл окружения  
