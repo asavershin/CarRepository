@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AutoserviceService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">car</a> &gt; <a href="index.source.html" class="el_package">asavershin.car.services</a> &gt; <span class="el_source">AutoserviceService.java</span></div><h1>AutoserviceService.java</h1><pre class="source lang-java linenums">package asavershin.car.services;
+
+import asavershin.car.dao.entities.Autoservice;
+import asavershin.car.dao.repositories.AutoserviceRepository;
+import asavershin.car.handlers.localexceptions.NotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+<span class="fc" id="L10">@RequiredArgsConstructor</span>
+public class AutoserviceService {
+    private final AutoserviceRepository autoserviceRepository;
+
+    public Autoservice createAutoservice(Autoservice autoservice){
+<span class="fc" id="L15">        return autoserviceRepository.save(autoservice);</span>
+    }
+
+    public Autoservice getAutoservice(Long autoserviceId) {
+<span class="fc" id="L19">        Autoservice autoservice = autoserviceRepository.findAutoserviceById(autoserviceId);</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if(autoservice == null){</span>
+<span class="fc" id="L21">            throw new NotFoundException(&quot;Салон с Id &quot;+autoserviceId+&quot; не найден&quot;);</span>
+        }
+<span class="fc" id="L23">        return autoservice;</span>
+    }
+
+    public void deleteAutoservice(Long autoserviceId){
+<span class="fc" id="L27">        var autoservice = autoserviceRepository.findAutoserviceById(autoserviceId);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if(autoservice==null){</span>
+<span class="fc" id="L29">            throw  new NotFoundException(&quot;Автосервиса с id &quot; + autoserviceId + &quot; нет&quot;);</span>
+        }
+<span class="fc" id="L31">        autoservice.getCars().forEach(car -&gt; car.setAutoservice(null));</span>
+<span class="fc" id="L32">        autoserviceRepository.delete(autoservice);</span>
+<span class="fc" id="L33">    }</span>
+
+    public Autoservice updateAutoservice(Long autoserviceId, String name,
+                                                 String address, String country) {
+<span class="fc" id="L37">        Autoservice autoservice = autoserviceRepository.findAutoserviceById(autoserviceId);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if(autoservice == null){</span>
+<span class="fc" id="L39">            throw new NotFoundException(&quot;Салон с Id &quot;+autoserviceId+&quot; не найден&quot;);</span>
+        }
+<span class="fc" id="L41">        autoservice.setName(name);</span>
+<span class="fc" id="L42">        autoservice.setAddress(address);</span>
+<span class="fc" id="L43">        autoservice.setCountry(country);</span>
+<span class="fc" id="L44">        return autoserviceRepository.save(autoservice);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

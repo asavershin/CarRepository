@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="6" author="asavershin">
+        <createTable tableName="car_jn">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="car_jn_pk"/>
+            </column>
+            <column name="release_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="evp" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="person_id" type="bigint">
+                <constraints foreignKeyName="fk_car_person" references="person_jn(id)"/>
+            </column>
+            <column name="autoservice_id" type="bigint">
+                <constraints foreignKeyName="fk_car_autoservice" references="autoservice_ref(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

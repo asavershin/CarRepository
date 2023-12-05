@@ -1,17 +1,29 @@
 version: '3.8'
 
 services:
-  postgresql:
-    image: bitnami/postgresql:14
-    container_name: postgresql
-    environment:
-      POSTGRESQL_USERNAME: postgres
-      POSTGRESQL_PASSWORD: postgres
-      POSTGRESQL_DATABASE: postgres
+
+  backend-car:
+    container_name: backend-car
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5434:5432"
+      - "8081:8081"
+    depends_on:
+      - db-car
+    env_file:
+      - .properties
+
+
+  db-car:
+    image: bitnami/postgresql:14
+    container_name: db-car
+    env_file:
+      - .properties
+    ports:
+      - "5440:5432"
     volumes:
-      - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/postgresql/data/
 
 volumes:
-  postgres_data:
+  db_data:
