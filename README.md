@@ -2,6 +2,8 @@
 Реестр машин, которые могут быть привязаны к   
 определённому владельцу и автосервису
 
+swagger: http://localhost:8081/swagger-ui/index.html
+
 # Сборка проекта
 ./mvnw clean package -DskipTests
 docker compose up
