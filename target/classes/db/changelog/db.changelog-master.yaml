@@ -1,9 +1,0 @@
-databaseChangeLog:
-  -   include:
-        file: db/changelog/migrations/01-11-2023-create-person-jn.xml
-  -   include:
-        file: db/changelog/migrations/01-11-2023-create-autoservice_ref.xml
-  -   include:
-        file: db/changelog/migrations/01-11-2023-create-car-jn.xml
-#  -   include:
-#        file: db/changelog/migrations/01-11-2023-add-default-data.xml

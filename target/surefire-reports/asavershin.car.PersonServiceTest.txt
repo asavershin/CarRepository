@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: asavershin.car.PersonServiceTest
--------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.394 s - in asavershin.car.PersonServiceTest
